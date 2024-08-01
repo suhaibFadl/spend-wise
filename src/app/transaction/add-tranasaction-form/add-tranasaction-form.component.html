@@ -1,0 +1,72 @@
+
+
+  <!-- Button trigger modal -->
+<button type="button" class="btn p-3  border-1 btn-primary background-primary rounded-circle" data-bs-toggle="modal" data-bs-target="#exampleModal">
+  <fa-icon icon="plus" class=" xl-font mx-1"></fa-icon>
+</button>
+
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="exampleModalLabel">Add New Transaction</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <form [formGroup]="transactionForm" (ngSubmit)="onAddTransaction()">
+      <div class="modal-body">
+          <div class="mb-3">
+            <label for="title" class="form-label">Title</label>
+            <input type="text" class="form-control" formControlName="title" required id="exampleInputEmail1" aria-describedby="emailHelp"
+            [ngClass]="{
+              'border': transactionForm.controls['title'].invalid && (transactionForm.controls['title'].dirty || transactionForm.controls['title'].touched),
+              'border-danger-subtle':transactionForm.controls['title'] && (transactionForm.controls['title'].dirty || transactionForm.controls['title'].touched)
+            }" >
+            <div *ngIf="transactionForm.controls['title'].invalid && (transactionForm.controls['title'].dirty || transactionForm.controls['title'].touched)" class="error">
+              <div *ngIf="transactionForm.controls['title'].errors?.['required']" class="text-danger">Title is required</div>
+            </div>
+            <!-- <div id="emailHelp" class="form-text">We'll never share your email with anyone else.</div> -->
+          </div>
+          <div class="mb-3">
+            <label for="budget" class="form-label">Budget</label>
+            <input
+              type="text"
+              class="form-control"
+              formControlName="budget"
+              required
+              [ngClass]="{
+                'border': transactionForm.controls['budget'].invalid && (transactionForm.controls['budget'].dirty || transactionForm.controls['budget'].touched),
+                'border-danger-subtle': transactionForm.controls['budget'].invalid && (transactionForm.controls['budget'].dirty || transactionForm.controls['budget'].touched)
+              }"
+            >
+            <div *ngIf="transactionForm.controls['budget'].invalid && (transactionForm.controls['budget'].dirty || transactionForm.controls['budget'].touched)" class="error">
+              <div *ngIf="transactionForm.controls['budget'].errors?.['required']" class="text-danger">Budget is required</div>
+              <div *ngIf="transactionForm.controls['budget'].errors?.['pattern']" class="text-danger">Budget must be a numeric value</div>
+            </div>
+          </div>
+          <div>
+            <label for="type">Type</label>
+            <select id="type" class="form-select" aria-label="Transaction type" formControlName="type" required 
+      
+            [ngClass]="{
+              'border': transactionForm.controls['type'].invalid && (transactionForm.controls['type'].dirty || transactionForm.controls['type'].touched),
+              'border-danger-subtle':transactionForm.controls['type'] && (transactionForm.controls['type'].dirty || transactionForm.controls['type'].touched)
+            }" >
+              <option value="" disabled selected>Select Transaction Type</option>
+              <option value="income">Income</option>
+              <option value="outcome">Outcome</option>
+            </select>
+            <div *ngIf="transactionForm.controls['type'].invalid && (transactionForm.controls['type'].dirty || transactionForm.controls['type'].touched)" class="error">
+              <div *ngIf="transactionForm.controls['type'].errors?.['required']" class="text-danger">Type is required</div>
+            </div>
+          </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-outline-danger" data-bs-dismiss="modal" (click)="resetForm()">Close</button>
+        <button type="submit" class="btn btn-primary"  data-bs-dismiss="modal" #saveChangesButton   [disabled]="transactionForm.invalid">Save changes</button>
+      </div>
+    </form>
+    </div>
+  </div>
+</div>
+

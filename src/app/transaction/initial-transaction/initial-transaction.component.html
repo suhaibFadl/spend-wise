@@ -1,0 +1,42 @@
+<div class="background">
+    <div class="shape"></div>
+    <div class="shape"></div>
+  </div>
+  <form [formGroup]="transactionForm" (ngSubmit)="onSubmit()" novalidate>
+      <div class="text-dark h3 text-center">Your Balance</div>
+      <div class="my-5">
+        <!-- <label for="budget" class="form-label">Budget</label> -->
+        <input
+          type="text"
+          class="form-control text-dark"
+          formControlName="budget"
+          placeholder="2000$"
+          required
+          [ngClass]="{
+            'border': transactionForm.controls['budget'].invalid && (transactionForm.controls['budget'].dirty || transactionForm.controls['budget'].touched),
+            'border-danger-subtle': transactionForm.controls['budget'].invalid && (transactionForm.controls['budget'].dirty || transactionForm.controls['budget'].touched)
+          }"
+        >
+        <div *ngIf="transactionForm.controls['budget'].invalid && (transactionForm.controls['budget'].dirty || transactionForm.controls['budget'].touched)" class="error">
+          <div *ngIf="transactionForm.controls['budget'].errors?.['required']" class="text-danger">Budget is required</div>
+          <div *ngIf="transactionForm.controls['budget'].errors?.['pattern']" class="text-danger">Budget must be a numeric value</div>
+        </div>
+      </div>
+      <div>
+        <!-- <label for="type">Type</label> -->
+        <select id="type" class="form-select text-dark" aria-label="Transaction type" formControlName="type" required 
+        [ngClass]="{
+          'border': transactionForm.controls['type'].invalid && (transactionForm.controls['type'].dirty || transactionForm.controls['type'].touched),
+          'border-danger-subtle':transactionForm.controls['type'] && (transactionForm.controls['type'].dirty || transactionForm.controls['type'].touched)
+        }" >
+          <option class="text-dark" value="" disabled selected>Select Transaction Type</option>
+          <option class="text-dark" value="income">Assets</option>
+          <option class="text-dark" value="outcome">Debt</option>
+        </select>
+        <div *ngIf="transactionForm.controls['type'].invalid && (transactionForm.controls['type'].dirty || transactionForm.controls['type'].touched)" class="error">
+          <div *ngIf="transactionForm.controls['type'].errors?.['required']" class="text-danger">Type is required</div>
+        </div>
+      </div>
+      <!-- <div class="text-danger">{{loginError}}</div> -->
+      <button type="submit">Done</button>
+  </form>

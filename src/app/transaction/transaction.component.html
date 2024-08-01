@@ -1,0 +1,56 @@
+<div class="container-lg">
+    <app-sidebar/>
+    <div class="row  mx-4 my-3">
+        <div class="card border-0 pt-2 shadow primary d-flex flex-column  justify-content-center align-items-center">
+           <div class="card-header  p-0 border-0 primary">
+            <div class="text-2nd xl-font">Total Balance</div>
+           </div>
+           <div class="card-body p-0">
+            <div class="text-2nd xxl-font">{{store.calculateBalance()}}</div>
+           </div>
+        </div> 
+    </div>
+    <div class="row justify-content-between  mx-4 my-3">
+        <div class="card col-5 border-0 shadow secondary">
+            <div class="card-body">
+             <div class="row mt-1">
+                <span class="xl-font text-2nd col-8">Incomes</span>   
+                <div class="xl-font text-2nd  col-4">{{store.calculateIncomes()}}</div>
+             </div>
+            </div>
+         </div> 
+         <div class="col-2 d-flex justify-content-center align-items-center" style="padding-top: calc(50vh - (your-content-height / 2))px;">
+            <app-add-tranasaction-form/>
+         </div>
+        <div class="card col-5 border-0 shadow secondary">
+            <div class="card-body">
+             <div class="row mt-1">
+                <span class="xl-font text-2nd col-8">Outcomes</span>   
+                <div class="xl-font text-2nd  col-4">{{store.calculateOutcomes()}}</div>
+             </div>
+            
+            </div>
+         </div> 
+    </div>
+    
+    <div class="my-5">
+        @for(transaction of store.transactions(); track transaction.id; let index = $index){
+            <div class="row background-primary mx-4 my-2 shadow-sm rounded py-3">
+                <div class="col-5  d-flex flex-column justify-content-between pl-3">
+                    <p class="l-font text-2nd px-3"><span class="ml-3">{{transaction.title}}</span></p>
+                    <p class="text-2nd px-3">{{transaction.type}}</p>
+                </div>
+                <div class="col-5  d-flex flex-column justify-content-between">
+                    <p class=" text-2nd  text-center pt-2">{{transaction.date | date:'shortDate'}}</p>
+                    <p class=" text-2nd text-center">{{transaction.budget}} LD</p>
+                </div>
+                <div class="col-2  text-danger d-flex align-items-center justify-content-center">
+                   <button class="btn text-danger">
+                    <fa-icon class="shadow-lg" icon="trash" (click)="onDeleteTransaction(transaction.id)"></fa-icon>
+                   </button>
+                </div>
+            </div>
+            <!-- <p>{{transaction.user}}</p> -->
+        }    
+    </div>    
+</div>

@@ -1,0 +1,43 @@
+
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; background-color: #fbf7f2;}
+.primary { background: #b69779;}
+.txt-primary { color: #b69779;}
+.secondary { background-color: #aba98d;}
+.text-2nd { color: #fbf7f2;}
+.background-primary { background-color: #d3b89d;}
+.background-secondary { background-color: #fbf7f2;}
+.xxl-font {font-size: 64px;}
+.xl-font {font-size: 30px;}
+.l-font {font-size: 24px;}
+.del-icon { font-size: 30px}
+
+.btn-primary {
+    background-color: #b69779;
+    border-color: #b69779;
+  }
+   
+
+.btn-primary:active, .btn-primary.active {
+
+  background-color: #d3b89d !important;
+  border-color: #d3b89d !important;
+}
+
+.btn-primary:focus {
+  background-color: #d3b89d;
+  border-color: #d3b89d ;
+}
+
+.btn-primary:hover {
+background-color: #d3b89d;
+border-color: #d3b89d;
+
+}
+
+.btn-primary:disabled {
+  background-color: #b69779 !important;
+  border-color: #b69779 !important;
+  cursor: not-allowed;
+  opacity: 0.65; /* Optional: Add opacity to indicate it's disabled */
+}
