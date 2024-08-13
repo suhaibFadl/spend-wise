@@ -1,20 +1,20 @@
 export const environment = {
     production: true,
     firebaseConfig: {
-        apiKey: "AIzaSyBCPl_Bvulx6Vm0wFZekaqgZ8M7z1bGX2I",
+        apiKey: "",
 
-        authDomain: "money-tracking-8b27a.firebaseapp.com",
+        authDomain: "",
 
-        databaseURL: "https://money-tracking-8b27a-default-rtdb.firebaseio.com",
+        databaseURL: "",
 
-        projectId: "money-tracking-8b27a",
+        projectId: "",
 
-        storageBucket: "money-tracking-8b27a.appspot.com",
+        storageBucket: "",
 
-        messagingSenderId: "842955748311",
+        messagingSenderId: "",
 
-        appId: "1:842955748311:web:0687766f242de2bb135192",
+        appId: "",
 
-        measurementId: "G-6RJL8JZDTQ"
+        measurementId: ""
     },
   };
