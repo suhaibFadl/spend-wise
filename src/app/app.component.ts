@@ -18,7 +18,11 @@ export class AppComponent implements OnInit {
   constructor(
     public authService: AuthService, 
     private router: Router,
-  ) {}
+  ) {
+    this.store.loadAll().then(() => {
+      this.store.calculateMonthlyTransactions()
+    })
+  }
   
   async ngOnInit(): Promise<void> {
     await this.store.getCurrentUser()

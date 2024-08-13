@@ -1,0 +1,36 @@
+<div class="container-lg" style="height: 100%;">
+    <app-sidebar/>  
+    <div class="row mt-5">
+        <div class="col-12 shadow rounded">
+            <div class="d-flex flex-row-reverse align-items-center p-5">
+                <div class="squere outcome-squere"></div>
+                <span>outcomes </span>
+                <div class="mx-3"></div>
+                <div class="squere income-squere"></div>
+                <span>Incomes </span>
+            </div>
+            <div class="bar-container justify-content-center">
+              
+                <div class="m-3" *ngFor="let entry of monthlyStatisticsEntries">
+                    <div class="d-flex align-items-end">
+                      <div class="bar income-bar"  [@grow]="entry[1].incomes > 0 ? 'active' : 'inactive'"
+                        [ngClass]="{ 'text-dark': entry[1].incomes == 0}"
+                        [style.height.px]="entry[1].incomes * 2" data-toggle="tooltip" title="Balance: $2000">
+                        {{ entry[1].incomes }}</div>
+                      <div class="bar outcome-bar"  [@grow]="entry[1].outcomes > 0 ? 'active' : 'inactive'"
+                        [ngClass]="{ 'text-dark': entry[1].outcomes == 0}"  
+                        [style.height.px]="entry[1].outcomes * 2">
+                        {{ entry[1].outcomes }}</div>
+                    </div>
+                    <div class="bar-label">{{ entry[0] }}</div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+</div>
+<script>
+    $(document).ready(function () {
+        $('[data-toggle="tooltip"]').tooltip();
+    });
+</script>

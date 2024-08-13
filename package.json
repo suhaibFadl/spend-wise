@@ -28,6 +28,7 @@
     "@fortawesome/free-regular-svg-icons": "^6.4.2",
     "@fortawesome/free-solid-svg-icons": "^6.4.2",
     "@ngrx/signals": "^17.2.0",
+    "date-fns": "^3.6.0",
     "dotenv": "^16.4.5",
     "express": "^4.18.2",
     "firebase": "^10.12.3",

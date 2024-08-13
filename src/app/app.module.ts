@@ -13,12 +13,14 @@ import { AddTranasactionFormComponent } from './transaction/add-tranasaction-for
 import { SignupComponent } from './auth/signup/signup.component';
 import { LoginComponent } from './auth/login/login.component';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
-import { ReactiveFormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { initializeApp, provideFirebaseApp } from '@angular/fire/app';
 import { getAuth, provideAuth } from '@angular/fire/auth';
 import { getFirestore, provideFirestore } from '@angular/fire/firestore';
 import { SidebarComponent } from './sidebar/sidebar.component';
 import { InitialTransactionComponent } from './transaction/initial-transaction/initial-transaction.component';
+import { StatisticsComponent } from './statistics/statistics.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 @NgModule({
   declarations: [
@@ -30,6 +32,7 @@ import { InitialTransactionComponent } from './transaction/initial-transaction/i
     LoginComponent,
     SidebarComponent,
     InitialTransactionComponent,
+    StatisticsComponent,
   ],
   imports: [
     AngularFireAuthModule,
@@ -38,6 +41,8 @@ import { InitialTransactionComponent } from './transaction/initial-transaction/i
     AppRoutingModule,
     FontAwesomeModule,
     ReactiveFormsModule,
+    FormsModule,
+    BrowserAnimationsModule
    
   ],
   providers: [

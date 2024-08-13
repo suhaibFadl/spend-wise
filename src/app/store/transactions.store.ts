@@ -3,19 +3,23 @@ import { patchState, signalStore, withComputed, withMethods, withState } from '@
 import { User } from 'firebase/auth';
 import { User as FirebaseUser } from '@firebase/auth-types';
 import { AuthService } from "../shared/auth/auth.service";
+import { format } from 'date-fns';
 
 import { Transaction, TransactionType } from "../shared/transaction/transaction.model";
 import { TransactionService } from "../shared/transaction/transaction.service";
+import { MonthlyTransactions, months } from "../shared/statistics/monthly-transactions.model";
 
 type TransactionsState = {
     user: User | null,
     transactions: Transaction[];
     filter: TransactionType;
+    monthlyStatistics: Record<string, MonthlyTransactions>
 }
 
 const initialState: TransactionsState = {
     user: null,
     transactions: [],
+    monthlyStatistics: months,
     filter: "all",
 }
 
@@ -51,15 +55,16 @@ export const TransactionsStore = signalStore(
             },
 
             async loadAll() {
-
                 const user = !!store.user() ?
-                store.user()
-                : await authService.getCurrentUser();
-
-                console.log('User is Here')
+                    store.user()
+                    : await authService.getCurrentUser();
                 const transactions = await transactoinsService.getTransactions(user!.uid);
-                // const transactions = await transactoinsService.getTransactions(store.user.email());
                 patchState(store, {user,transactions});
+            },
+
+            updateFilter(transactionType: TransactionType){
+                const filter = transactionType
+                patchState(store, {filter})
             },
 
             async addTransaction(
@@ -85,13 +90,29 @@ export const TransactionsStore = signalStore(
                     transactions: [transaction, ...state.transactions]
                 }))
             },
-          
+            
             async deleteTransaction(id: string){
                 await transactoinsService.deleteTransaction(id);
                 patchState(store, (state) => ({
                     transactions: state.transactions.filter(transaction => transaction.id !== id)
                 }))
-            }
+            },
+            calculateMonthlyTransactions (){
+                console.log("HEre")
+                const transactions = store.transactions();
+                const monthlyStatistics = { ...initialState.monthlyStatistics }; // Create a new object to avoid mutating state directly
+    
+                for (const transaction of transactions) {
+                    let month: string = format(transaction.date!, 'MMM');
+                    if (transaction.type === "outcome") {
+                        monthlyStatistics[month].outcomes += transaction.budget;
+                    } else if (transaction.type === "income") {
+                        monthlyStatistics[month].incomes += transaction.budget;
+                    }
+                }
+                patchState(store, {monthlyStatistics});
+            },
+           
         }),
     ),
 
@@ -123,7 +144,19 @@ export const TransactionsStore = signalStore(
                 .map((transaction) => transaction.type == 'outcome' ? transaction.budget * -1 : transaction.budget)
                 .reduce((sum, budget) => sum + budget, 0)
             return blanaceSum;
-        })
+        }),
+
+        filteredTransactins: computed(() => {
+            const transactions = state.transactions();
+            switch (state.filter()) {
+                case "all":
+                    return transactions;
+                case "income":
+                    return transactions.filter(transaction => transaction.type === "income");
+                case "outcome":
+                    return transactions.filter(transaction => transaction.type === "outcome");
+            }
+        }),
     })
     )
 )

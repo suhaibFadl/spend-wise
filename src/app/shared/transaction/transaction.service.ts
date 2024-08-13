@@ -1,5 +1,5 @@
 import { inject, Injectable } from '@angular/core';
-import { Transaction } from './transaction.model';
+import { Transaction, TransactionType } from './transaction.model';
 import { collection, CollectionReference, deleteDoc, doc, DocumentData, Firestore, getDoc, getDocs, getFirestore, limit, query, setDoc, Timestamp, where } from 'firebase/firestore';
 import { environment } from '../../../environments/environment';
 import { initializeApp } from '@angular/fire/app';

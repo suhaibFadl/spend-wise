@@ -32,9 +32,22 @@
             </div>
          </div> 
     </div>
-    
+
     <div class="my-5">
-        @for(transaction of store.transactions(); track transaction.id; let index = $index){
+       <div class="row align-items-center justify-content-center">
+        
+        <div class="my-2 w-50 btn-group " role="group" aria-label="Basic radio toggle button group">
+            <input type="radio" class="btn-check" name="btnradio" id="btnradio1" autocomplete="off" [(ngModel)]="filterValue" (ngModelChange)="onFilterChange($event)" value="all" checked>
+            <label class="btn btn-outline-primary" for="btnradio1" >All</label>
+          
+            <input type="radio" class="btn-check" name="btnradio" id="btnradio2" autocomplete="off" [(ngModel)]="filterValue" (ngModelChange)="onFilterChange($event)" value="income">
+            <label class="btn btn-outline-primary" for="btnradio2">Income</label>
+          
+            <input type="radio" class="btn-check" name="btnradio" id="btnradio3" autocomplete="off" [(ngModel)]="filterValue" (ngModelChange)="onFilterChange($event)" value="outcome">
+            <label class="btn btn-outline-primary" for="btnradio3">Outcome</label>
+        </div>
+       </div>
+        @for(transaction of store.filteredTransactins(); track transaction.id; let index = $index){
             <div class="row background-primary mx-4 my-2 shadow-sm rounded py-3">
                 <div class="col-5  d-flex flex-column justify-content-between pl-3">
                     <p class="l-font text-2nd px-3"><span class="ml-3">{{transaction.title}}</span></p>

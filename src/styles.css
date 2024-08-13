@@ -12,13 +12,29 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; background-
 .l-font {font-size: 24px;}
 .del-icon { font-size: 30px}
 
+
+.btn-outline-primary{
+  border-color: #b69779 !important;
+  color: #b69779 !important;
+}
+
+.btn-group label.btn-outline-primary {
+  width: 70px !important;
+}
+
+input[type="radio"]:checked + label  {
+  background-color: #b69779 !important;
+  border-color: #b69779 !important;
+  color: white !important;
+}
 .btn-primary {
-    background-color: #b69779;
-    border-color: #b69779;
+    background-color: #b69779 !important;
+    border-color: #b69779 !important;
+    color: white !important;
   }
    
 
-.btn-primary:active, .btn-primary.active {
+.btn-primary:active,.btn-primary:checked, .btn-primary.active {
 
   background-color: #d3b89d !important;
   border-color: #d3b89d !important;
